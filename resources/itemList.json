@@ -1,0 +1,26 @@
+[
+{
+  "description": "das ist eine description",
+  "maxStackSize": 50,
+  "name": "Gras",
+  "id": 100
+},
+{
+  "description": "das ist eine description",
+  "maxStackSize": 50,
+  "name": "Sand",
+  "id": 101
+},
+  {
+    "description": "das ist eine description",
+    "maxStackSize": 50,
+    "name": "Wasser",
+    "id": 102
+  },
+  {
+    "description": "das ist eine description",
+    "maxStackSize": 50,
+    "name": "Wood",
+    "id": 103
+  }
+]
