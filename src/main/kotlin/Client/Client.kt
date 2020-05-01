@@ -44,22 +44,19 @@ class Client(){
         var reader = socket.getInputStream()
         var bufferedReader : BufferedReader = BufferedReader(InputStreamReader(reader))
 
-        while(bufferedReader.ready()){
-            println(bufferedReader.readLine())
+        for(line in bufferedReader.lines()){
+            println(line)
         }
     }
     @Throws(IOException::class)
     fun writeToServer(socket : Socket){
-
-
-
             val writer = socket.getOutputStream()
             var ps = PrintStream(writer,true)
 
             ps.println("Message from Client To Server")
-        ps.println("Message from Client To Server")
-        ps.println("Message from Client To Server")
-        ps.println("Message from Client To Server")
+            ps.println("Message from Client To Server")
+            ps.println("Message from Client To Server")
+            ps.println("Message from Client To Server")
 
 
 

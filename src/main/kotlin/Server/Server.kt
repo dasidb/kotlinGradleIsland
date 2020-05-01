@@ -33,7 +33,7 @@ class Server(){
 
 
                 readFromClient(socket)
-                // writeToClient(socket)
+                writeToClient(socket)
 
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -52,9 +52,14 @@ class Server(){
 
     // this is written to the Client
 
-    fun writeToClient(socket: Socket) {
-    var writer = PrintStream(socket.getOutputStream())
+    fun writeToClient(socket: Socket?) {
+        println("kommt an")
+    var writer = PrintStream(socket!!.getOutputStream(),true)
         writer.println("Message from Server to CLient")
+        writer.println("Message from Server to CLient")
+        writer.println("Message from Server to CLient")
+        writer.println("Message from Server to CLient")
+
 
 
 
@@ -63,17 +68,22 @@ class Server(){
     fun readFromClient(socket: Socket?){
         val writer = PrintStream(socket!!.getOutputStream())
 
+        try {
 
-           val reader = BufferedReader(InputStreamReader(socket?.getInputStream()))
-           var s: String?
-          //  println(reader.ready())
-          // while (reader.h) {
-        for(line in reader.lines()){
-              // s = line
-               println(line)
-               //writer.println(s)
 
-           }
+            val reader = BufferedReader(InputStreamReader(socket?.getInputStream()))
+            var s: String?
+            for (line in reader.lines()) {
+
+                println(line)
+
+
+
+            }
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+       // writeToClient(socket)
 
 
 
