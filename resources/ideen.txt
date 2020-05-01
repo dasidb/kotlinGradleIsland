@@ -1,0 +1,6 @@
+Server Client struktur
+client hält die ganze draw logik etc.
+
+server enthält erstmal die bewegungs logik
+
+client will sich bewegen schickt einen request "move direction" server wertet dieses aus prüft dieses und gibt einen bool zurück true/false
