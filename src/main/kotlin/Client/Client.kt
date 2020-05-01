@@ -1,17 +1,20 @@
 package Client
 
+import Server.ClientHandler
+import Server.ServerToClientWriter
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.io.PrintStream
 import java.lang.Exception
 import java.net.Socket
+import kotlin.test.todo
 
 fun main() {
     var client = Client()
 }
 class Client(){
-
+    val clientWriter  = ServerToClientWriter()
     init {
         startServer()
     }
@@ -20,15 +23,18 @@ class Client(){
         var socket: Socket? = null
             try {
 
-
+                todo { "einen Serer Handler erstellen" }
                 socket = Socket("localhost", 8654)
+                var t1 = ClientHandler(socket, clientWriter)
+                t1.start()
+
                 writeToServer(socket)
-                readFromServer(socket)
+               // readFromServer(socket)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
                 if (socket != null) try {
-                    socket.close()
+                   // socket.close()
                     println("Client socket geschlossen")
                 }catch (e : Exception){
                     e.printStackTrace()
@@ -52,11 +58,11 @@ class Client(){
     fun writeToServer(socket : Socket){
             val writer = socket.getOutputStream()
             var ps = PrintStream(writer,true)
+            while (true) {
+                ps.println("move up")
+                Thread.sleep(1000)
+            }
 
-            ps.println("Message from Client To Server")
-            ps.println("Message from Client To Server")
-            ps.println("Message from Client To Server")
-            ps.println("Message from Client To Server")
 
 
 

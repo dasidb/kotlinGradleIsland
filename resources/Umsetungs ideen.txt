@@ -1,0 +1,3 @@
+Server Client Threads
+read scheint die methode zu blockieren/ wartet auf weitere reads daher muss dieses in einen Thread ausgelagert werden.
+write scheint ohne probleme durchzulaufen

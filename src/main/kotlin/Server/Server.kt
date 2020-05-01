@@ -10,10 +10,12 @@ fun main() {
     server.startServer()
 }
 
-class Server(){
+class Server() : Runnable{
     var serverSocket : ServerSocket
+    var clientWriter = ServerToClientWriter()
     init {
         serverSocket = ServerSocket(8654)
+
 
     }
 
@@ -26,21 +28,27 @@ class Server(){
 
     fun waitForClientsToConnect(){
        // while(true) {
+
+
             var socket: Socket? = null
 
             try {
                 socket = serverSocket.accept()
 
 
-                readFromClient(socket)
+              //  readFromClient(socket)
+                var t1 = ClientHandler(socket, clientWriter)
+                t1.start()
+
+
                 writeToClient(socket)
 
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
                 if (socket != null) try {
-                      socket.close()
-                    println("Server socket geschlossen")
+                    //  socket.close()
+                    //println("Server socket geschlossen")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -87,5 +95,11 @@ class Server(){
 
 
 
+    }
+
+    override fun run() {
+       // while (true) {
+            println("hallo")
+        //}
     }
 }
