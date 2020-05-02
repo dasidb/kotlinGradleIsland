@@ -6,13 +6,16 @@ import java.net.ServerSocket
 import java.net.Socket
 
 fun main() {
-    var server : Server = Server()
-    server.startServer()
+    var gameServer : GameServer = GameServer()
+    gameServer.startServer()
 }
 
-class Server() : Runnable{
+class GameServer() : Runnable{
     var serverSocket : ServerSocket
-    var clientWriter = ServerToClientWriter()
+
+    var socketMap = HashMap<Int, ClientHandler>()
+    var playerID = 0;
+    val noiseSeed = 20
     init {
         serverSocket = ServerSocket(8654)
 
@@ -35,10 +38,17 @@ class Server() : Runnable{
             try {
                 socket = serverSocket.accept()
 
+              //  var t1 = ClientHandler(socket, ServerToClientWriter(), playerID)
+                //t1.start()
+                //socketMap.put(playerID, t1)
+                socketMap.put(playerID, ClientHandler(socket, ServerToClientWriter(), playerID))
+                socketMap.get(playerID)?.start()
+                playerID++
+
 
               //  readFromClient(socket)
-                var t1 = ClientHandler(socket, clientWriter)
-                t1.start()
+
+
 
 
                 writeToClient(socket)

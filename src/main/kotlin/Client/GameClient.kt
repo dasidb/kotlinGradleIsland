@@ -1,6 +1,6 @@
 package Client
 
-import Server.ClientHandler
+import Server.ServerHandler
 import Server.ServerToClientWriter
 import java.io.BufferedReader
 import java.io.IOException
@@ -11,9 +11,9 @@ import java.net.Socket
 import kotlin.test.todo
 
 fun main() {
-    var client = Client()
+    var client = GameClient()
 }
-class Client(){
+class GameClient(){
     val clientWriter  = ServerToClientWriter()
     init {
         startServer()
@@ -25,7 +25,7 @@ class Client(){
 
                 todo { "einen Serer Handler erstellen" }
                 socket = Socket("localhost", 8654)
-                var t1 = ClientHandler(socket, clientWriter)
+                var t1 = ServerHandler(socket, clientWriter)
                 t1.start()
 
                 writeToServer(socket)
@@ -63,10 +63,8 @@ class Client(){
                 Thread.sleep(1000)
             }
 
-
-
-
-
     }
+
+
 
 }

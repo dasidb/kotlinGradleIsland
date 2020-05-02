@@ -1,3 +1,4 @@
+import Client.GameClient
 import processing.core.PApplet
 import processing.event.KeyEvent
 
@@ -13,6 +14,7 @@ class GameManager(
     var gameStateMap : MutableMap<String, GameState> = HashMap()
     var character : Character = Character(Game.imageMap.get("character")!!)
     var camera : Camera = Camera()
+    lateinit var client : GameClient
 
 
     fun changeGameState(gameStateKey : String, gameState: GameState){

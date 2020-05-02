@@ -9,10 +9,5 @@ class ServerToClientWriter{
     fun writeToClient(socket: Socket?, msg : String) {
         var writer = PrintStream(socket!!.getOutputStream(),true)
         writer.println(msg)
-
-
-
-
-
     }
 }

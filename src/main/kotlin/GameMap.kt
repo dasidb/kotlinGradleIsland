@@ -36,6 +36,9 @@ class GameMap(pApplet: PApplet){
         }
 
     fun useNoice(x : Float, y : Float) : Float{
+        //TODO("Ask Server for Noise seed pApplet.noiseSeed(20L) so that every client has
+        // the same seed (seed should be random generated)")
+
         var noise : Float = pApplet.noise(x * 2f, y * 2f) +
                 0.5F * pApplet.noise(2F * x, 2F * y) +
                 0.25F * pApplet.noise(3F * x, 3F * y)

@@ -5,8 +5,9 @@ import java.io.InputStreamReader
 import java.io.PrintStream
 import java.lang.Exception
 import java.net.Socket
+import kotlin.test.todo
 
-class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClientWriter,val id: Int) : Thread() {
+class ServerHandler(val socket : Socket,val serverToClientWriter: ServerToClientWriter) : Thread() {
 
     override fun run() {
         readFromClient(socket)
@@ -24,22 +25,16 @@ class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClient
 
                 println(line)
 
-                if(line.startsWith("move")){
-                    checkIfCanMove()
+                if(line.startsWith("canMoveUP")){
+                    canMove()
                 }
-                if(line.startsWith("seed"))
-                    sendSeed()
 
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-    fun checkIfCanMove(){
-        serverToClientWriter.writeToClient(socket, "canMoveUP" + id)
-    }
-
-    fun sendSeed(){
-
+    fun canMove(){
+        todo { "kann sich bewegen" }
     }
 }
