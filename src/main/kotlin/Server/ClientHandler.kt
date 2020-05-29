@@ -22,7 +22,7 @@ class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClient
             var s: String?
             for (line in reader.lines()) {
 
-                println(line)
+                println(line + " Client Handler")
 
                 if(line.startsWith("move")){
                     checkIfCanMove()

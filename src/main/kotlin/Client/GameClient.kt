@@ -51,7 +51,7 @@ class GameClient(){
         var bufferedReader : BufferedReader = BufferedReader(InputStreamReader(reader))
 
         for(line in bufferedReader.lines()){
-            println(line)
+            println(line + " reads the line client")
         }
     }
     @Throws(IOException::class)

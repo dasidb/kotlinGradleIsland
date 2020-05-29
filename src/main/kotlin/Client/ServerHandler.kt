@@ -23,7 +23,7 @@ class ServerHandler(val socket : Socket,val serverToClientWriter: ServerToClient
             var s: String?
             for (line in reader.lines()) {
 
-                println(line)
+                println(line+ " reads line server handler")
 
                 if(line.startsWith("canMoveUP")){
                     canMove()
@@ -35,6 +35,6 @@ class ServerHandler(val socket : Socket,val serverToClientWriter: ServerToClient
         }
     }
     fun canMove(){
-        todo { "kann sich bewegen" }
+        //todo { "kann sich bewegen" }
     }
 }
