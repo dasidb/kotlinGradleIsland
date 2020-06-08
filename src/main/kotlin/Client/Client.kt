@@ -22,8 +22,9 @@ class Client(){
 
 
                 socket = Socket("localhost", 8654)
+
                 writeToServer(socket)
-                readFromServer(socket)
+               // readFromServer(socket)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {
@@ -41,25 +42,28 @@ class Client(){
 
     @Throws(IOException::class)
     fun readFromServer(socket : Socket){
+        println("kommt an client read")
         var reader = socket.getInputStream()
         var bufferedReader : BufferedReader = BufferedReader(InputStreamReader(reader))
 
         for(line in bufferedReader.lines()){
             println(line)
+
         }
     }
     @Throws(IOException::class)
     fun writeToServer(socket : Socket){
             val writer = socket.getOutputStream()
-            var ps = PrintStream(writer,true)
+            var ps = PrintStream(writer)
 
             ps.println("Message from Client To Server")
+            Thread.sleep(1000)
             ps.println("Message from Client To Server")
+        Thread.sleep(1000)
             ps.println("Message from Client To Server")
+        Thread.sleep(1000)
             ps.println("Message from Client To Server")
-
-
-
+            ps.flush()
 
     }
 

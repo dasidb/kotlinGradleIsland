@@ -30,10 +30,11 @@ class Server(){
 
             try {
                 socket = serverSocket.accept()
-
+                println(socket.inetAddress)
+                writeToClient(socket)
 
                 readFromClient(socket)
-                writeToClient(socket)
+
 
             } catch (e: IOException) {
                 e.printStackTrace()
@@ -54,15 +55,12 @@ class Server(){
 
     fun writeToClient(socket: Socket?) {
         println("kommt an")
-    var writer = PrintStream(socket!!.getOutputStream(),true)
+    var writer = PrintStream(socket!!.getOutputStream())
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
-
-
-
-
+        writer.flush()
     }
     @Throws(IOException::class)
     fun readFromClient(socket: Socket?){
@@ -73,19 +71,20 @@ class Server(){
 
             val reader = BufferedReader(InputStreamReader(socket?.getInputStream()))
             var s: String?
-            for (line in reader.lines()) {
 
+            for (line in reader.lines()) {
+                println(line.length)
                 println(line)
 
 
-
             }
+
         }catch (e: Exception){
-            e.printStackTrace()
+            println("nach methode")
         }
-       // writeToClient(socket)
 
 
 
+        println("nach methode")
     }
 }
