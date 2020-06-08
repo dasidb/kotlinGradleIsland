@@ -1,4 +1,4 @@
-package Client
+package legacy
 
 import Server.ServerHandler
 import Server.ServerToClientWriter
@@ -8,7 +8,6 @@ import java.io.InputStreamReader
 import java.io.PrintStream
 import java.lang.Exception
 import java.net.Socket
-import kotlin.test.todo
 
 fun main() {
     var client = GameClient()
@@ -16,14 +15,14 @@ fun main() {
 class GameClient(){
     val clientWriter  = ServerToClientWriter()
     init {
-        startServer()
+        connectToServer()
     }
 
-    fun startServer(){
+    fun connectToServer(){
         var socket: Socket? = null
             try {
 
-                todo { "einen Serer Handler erstellen" }
+
                 socket = Socket("localhost", 8654)
                 var t1 = ServerHandler(socket, clientWriter)
                 t1.start()

@@ -1,5 +1,7 @@
-package Server
+package legacy
 
+import Server.ClientHandler
+import Server.ServerToClientWriter
 import java.io.*
 import java.lang.Exception
 import java.net.ServerSocket
@@ -41,7 +43,7 @@ class GameServer() : Runnable{
               //  var t1 = ClientHandler(socket, ServerToClientWriter(), playerID)
                 //t1.start()
                 //socketMap.put(playerID, t1)
-                socketMap.put(playerID, ClientHandler(socket, ServerToClientWriter(), playerID))
+               // socketMap.put(playerID, ClientHandler(socket, ServerToClientWriter(), playerID,))
                 socketMap.get(playerID)?.start()
                 playerID++
 

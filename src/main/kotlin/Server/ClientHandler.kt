@@ -6,14 +6,14 @@ import java.io.PrintStream
 import java.lang.Exception
 import java.net.Socket
 
-class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClientWriter,val id: Int) : Thread() {
+class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClientWriter,val id: Int, val producer: Producer) : Thread() {
 
     override fun run() {
         readFromClient(socket)
     }
 
     fun readFromClient(socket: Socket?) {
-        val writer = PrintStream(socket!!.getOutputStream())
+
 
         try {
 
@@ -22,24 +22,20 @@ class ClientHandler(val socket : Socket,val serverToClientWriter: ServerToClient
             var s: String?
             for (line in reader.lines()) {
 
-                println(line + " Client Handler")
+                println(line)
 
                 if(line.startsWith("move")){
-                    checkIfCanMove()
+                    producer.writeToQueue(line)
                 }
-                if(line.startsWith("seed"))
-                    sendSeed()
+                if(line.startsWith("seed")){
+
+                }
+
 
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-    fun checkIfCanMove(){
-        serverToClientWriter.writeToClient(socket, "canMoveUP" + id)
-    }
 
-    fun sendSeed(){
-
-    }
 }

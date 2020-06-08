@@ -1,4 +1,3 @@
-import Client.GameClient
 import processing.core.PApplet
 
 class MenuGameState(pApplet: PApplet, gameManager: GameManager) : GameState(pApplet, gameManager) {
@@ -25,6 +24,6 @@ class MenuGameState(pApplet: PApplet, gameManager: GameManager) : GameState(pApp
     }
 
     fun choosedServer(){
-        gameManager.client = GameClient()
+
     }
 }
