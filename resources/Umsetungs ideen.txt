@@ -1,0 +1,13 @@
+Server Client Threads
+read scheint die methode zu blockieren/ wartet auf weitere reads daher muss dieses in einen Thread ausgelagert werden.
+write scheint ohne probleme durchzulaufen
+
+
+Server muss die Karte enthalten (den Seed für noise) diesen an die clients verteilen clients malen dann die map
+client spawnt an einer festen position und muss beim bewegen eine anfrage an den Server schicken.
+Dieser überprüft was sich auf dem hinzu bewegendem feld befindet. ist dieses Wasser wird die bewegung nicht erlaubt
+
+Server benötigt:
+-Die Map
+-Die Player Coordinaten (in einer Map)
+-Eine Liste mit Sockets

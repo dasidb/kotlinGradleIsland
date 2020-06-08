@@ -1,3 +1,4 @@
+import Client.GameClientv2
 import processing.core.PApplet
 import processing.event.KeyEvent
 
@@ -13,6 +14,10 @@ class GameManager(
     var gameStateMap : MutableMap<String, GameState> = HashMap()
     var character : Character = Character(Game.imageMap.get("character")!!)
     var camera : Camera = Camera()
+
+   // val GameServerv2 = Server.GameServerv2()
+    val gameClientv2 = GameClientv2()
+
 
 
     fun changeGameState(gameStateKey : String, gameState: GameState){

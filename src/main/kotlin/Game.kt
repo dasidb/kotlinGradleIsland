@@ -43,8 +43,12 @@ class Game : PApplet() {
         loadAssets()
         gameManager = GameManager(null, this)
         gameManager?.changeGameState("playGameState", PlayGameState(this, gameManager!!, gameManager!!.character))
+       // gameManager?.changeGameState("menuGameState", MenuGameState(this, gameManager!!))
+
         frameRate(60F)
         test()
+
+
         background(0F, 0F, 0F)
         loop()
 

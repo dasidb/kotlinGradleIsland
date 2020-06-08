@@ -1,5 +1,7 @@
-package Client
+package legacy
 
+import Server.ServerHandler
+import Server.ServerToClientWriter
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -8,20 +10,22 @@ import java.lang.Exception
 import java.net.Socket
 
 fun main() {
-    var client = Client()
+    var client = GameClient()
 }
-class Client(){
-
+class GameClient(){
+    val clientWriter  = ServerToClientWriter()
     init {
-        startServer()
+        connectToServer()
     }
 
-    fun startServer(){
+    fun connectToServer(){
         var socket: Socket? = null
             try {
 
 
                 socket = Socket("localhost", 8654)
+                var t1 = ServerHandler(socket, clientWriter)
+                t1.start()
 
                 writeToServer(socket)
                // readFromServer(socket)
@@ -29,7 +33,7 @@ class Client(){
                 e.printStackTrace()
             } finally {
                 if (socket != null) try {
-                    socket.close()
+                   // socket.close()
                     println("Client socket geschlossen")
                 }catch (e : Exception){
                     e.printStackTrace()
@@ -42,29 +46,24 @@ class Client(){
 
     @Throws(IOException::class)
     fun readFromServer(socket : Socket){
-        println("kommt an client read")
         var reader = socket.getInputStream()
         var bufferedReader : BufferedReader = BufferedReader(InputStreamReader(reader))
 
         for(line in bufferedReader.lines()){
-            println(line)
-
+            println(line + " reads the line client")
         }
     }
     @Throws(IOException::class)
     fun writeToServer(socket : Socket){
             val writer = socket.getOutputStream()
-            var ps = PrintStream(writer)
-
-            ps.println("Message from Client To Server")
-            Thread.sleep(1000)
-            ps.println("Message from Client To Server")
-        Thread.sleep(1000)
-            ps.println("Message from Client To Server")
-        Thread.sleep(1000)
-            ps.println("Message from Client To Server")
-            ps.flush()
+            var ps = PrintStream(writer,true)
+            while (true) {
+                ps.println("move up")
+                Thread.sleep(1000)
+            }
 
     }
+
+
 
 }

@@ -1,19 +1,26 @@
-package Server
+package legacy
 
+import Server.ClientHandler
+import Server.ServerToClientWriter
 import java.io.*
 import java.lang.Exception
 import java.net.ServerSocket
 import java.net.Socket
 
 fun main() {
-    var server : Server = Server()
-    server.startServer()
+    var gameServer : GameServer = GameServer()
+    gameServer.startServer()
 }
 
-class Server(){
+class GameServer() : Runnable{
     var serverSocket : ServerSocket
+
+    var socketMap = HashMap<Int, ClientHandler>()
+    var playerID = 0;
+    val noiseSeed = 20
     init {
         serverSocket = ServerSocket(8654)
+
 
     }
 
@@ -26,22 +33,34 @@ class Server(){
 
     fun waitForClientsToConnect(){
        // while(true) {
+
+
             var socket: Socket? = null
 
             try {
                 socket = serverSocket.accept()
-                println(socket.inetAddress)
+
+              //  var t1 = ClientHandler(socket, ServerToClientWriter(), playerID)
+                //t1.start()
+                //socketMap.put(playerID, t1)
+               // socketMap.put(playerID, ClientHandler(socket, ServerToClientWriter(), playerID,))
+                socketMap.get(playerID)?.start()
+                playerID++
+
+
+              //  readFromClient(socket)
+
+
+
+
                 writeToClient(socket)
-
-                readFromClient(socket)
-
 
             } catch (e: IOException) {
                 e.printStackTrace()
             } finally {
                 if (socket != null) try {
-                      socket.close()
-                    println("Server socket geschlossen")
+                    //  socket.close()
+                    //println("Server socket geschlossen")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -55,12 +74,15 @@ class Server(){
 
     fun writeToClient(socket: Socket?) {
         println("kommt an")
-    var writer = PrintStream(socket!!.getOutputStream())
+    var writer = PrintStream(socket!!.getOutputStream(),true)
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
         writer.println("Message from Server to CLient")
-        writer.flush()
+
+
+
+
     }
     @Throws(IOException::class)
     fun readFromClient(socket: Socket?){
@@ -71,20 +93,25 @@ class Server(){
 
             val reader = BufferedReader(InputStreamReader(socket?.getInputStream()))
             var s: String?
-
             for (line in reader.lines()) {
-                println(line.length)
+
                 println(line)
 
 
+
             }
-
         }catch (e: Exception){
-            println("nach methode")
+            e.printStackTrace()
         }
+       // writeToClient(socket)
 
 
 
-        println("nach methode")
+    }
+
+    override fun run() {
+       // while (true) {
+            println("hallo")
+        //}
     }
 }

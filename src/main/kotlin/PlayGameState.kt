@@ -1,3 +1,4 @@
+import Server.GameServerv2
 import processing.core.PApplet
 import processing.core.PVector
 import processing.event.KeyEvent
@@ -62,8 +63,12 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
     fun keyInput(key : Char, keyCode: Int, keyPressed: Boolean){
         if(keyPressed){
 
-            if(key == 'w')
+            if(key == 'w') {
                 character.moveUp()
+                gameManager.gameClientv2.clientToServerWriter?.writeToServer("move up can try")
+                //gameManager.gameClientv2.writeToServer("move up can try")
+
+            }
 
             if(key == 's')
                 character.moveDown()
@@ -74,7 +79,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
             if(key == 'q')
                 interactionDependingOnTile()
             if(key == 'b')
-                gameManager.currentGameState = CraftingGameState(character.inventory,pApplet,gameManager)
+                gameManager.currentGameState = CraftingGameState(pApplet,gameManager)
 
             if(key == 'e') {
                 character.gatherResources(gameManager.gameMap.gameMap.get(character.mapPosition)!!)

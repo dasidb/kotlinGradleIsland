@@ -26,7 +26,7 @@ class Character(image : PImage){
     fun moveUp(){
 
         mapPosition.y -=1
-        println("kommt in der funktion an")
+
     }
     fun moveDown(){
 
