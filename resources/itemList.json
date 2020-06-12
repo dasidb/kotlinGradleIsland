@@ -22,5 +22,22 @@
     "maxStackSize": 50,
     "name": "Wood",
     "id": 103
-  }
+  },
+  {
+  "description": "das ist eine description",
+  "maxStackSize": 5,
+  "name": "House",
+  "id": 300
+},  {
+  "description": "das ist eine description",
+  "maxStackSize": 10,
+  "name": "Axe",
+  "id": 400
+},  {
+  "description": "das ist eine description",
+  "maxStackSize": 5,
+  "name": "Tent",
+  "id": 301
+}
+
 ]

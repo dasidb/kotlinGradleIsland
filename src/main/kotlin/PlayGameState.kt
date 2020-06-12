@@ -1,8 +1,6 @@
-import Server.GameServerv2
 import processing.core.PApplet
 import processing.core.PVector
 import processing.event.KeyEvent
-import kotlin.test.todo
 
 //import kotlin.test.todo
 
@@ -79,7 +77,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
             if(key == 'q')
                 interactionDependingOnTile()
             if(key == 'b')
-                gameManager.currentGameState = CraftingGameState(pApplet,gameManager)
+                gameManager.currentGameState = CraftingGameState(pApplet, gameManager,character.inventory)
 
             if(key == 'e') {
                 character.gatherResources(gameManager.gameMap.gameMap.get(character.mapPosition)!!)

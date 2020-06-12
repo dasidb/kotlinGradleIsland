@@ -1,7 +1,7 @@
 import processing.core.PApplet
 import java.lang.IndexOutOfBoundsException
 
-class CraftingGameState(pApplet: PApplet, gameManager: GameManager) : GameState(pApplet,
+class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventory: Inventory) : GameState(pApplet,
     gameManager
 ){
     val craftingList : MutableList<Recipe>
@@ -27,20 +27,29 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager) : GameState(
         val testList : MutableList<CraftCost> = ArrayList()
         testList.add(CraftCost(103,5))
         testList.add(CraftCost(100,4))
-        craftingList.add(Recipe("Tent",testList))
+        craftingList.add(Recipe("Tent",testList,301))
         val testList2 : MutableList<CraftCost> = ArrayList()
         testList2.add(CraftCost(103,5))
         testList2.add(CraftCost(100,1))
-        craftingList.add(Recipe("Log",testList2))
+        craftingList.add(Recipe("Axe",testList2,400))
         val testList3 : MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(103,5))
         testList3.add(CraftCost(100,2))
-        craftingList.add(Recipe("House",testList3))
+        craftingList.add(Recipe("House",testList3,300))
 
     }
 
-    fun craftItem(){
+    fun craftItem(itemName : String){
+        craftingList.forEach {
+            if(it.name.equals(itemName)){
+                checkForMats(it)
+            }
+        }
 
+    }
+
+    private fun checkForMats(it: Recipe) : Boolean{
+        inventory.playerItemMap.get(it.)
     }
 
     fun craftingMenu(){
