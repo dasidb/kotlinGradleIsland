@@ -2,10 +2,6 @@
 import processing.core.PApplet
 import processing.core.PImage
 import processing.core.PVector
-import kotlin.test.currentStackTrace
-import kotlin.test.todo
-
-
 
 
 class Character(image : PImage){
@@ -63,15 +59,15 @@ class Character(image : PImage){
         }
     }
 
-    fun gatherResources(tile : Tile){
+    fun gatherResources(tile: Tile, itemMap: MutableMap<Int, Item>){
     if(tile is WaterTile)
-        inventory.addItemToInventory(Item(102,"Wasser","",50),(Math.random() * 10).toInt())
+        inventory.addItemToInventory(itemMap.get(102)!!,(Math.random() * 10).toInt())
         else if(tile is GrassTreeTile)
-        inventory.addItemToInventory(Item(103,"Wood","",50),(Math.random() * 10).toInt())
+        inventory.addItemToInventory(itemMap.get(103)!!,(Math.random() * 10).toInt())
         else if(tile is GrassTile)
-        inventory.addItemToInventory(Item(100,"Gras","",50),(Math.random() * 10).toInt())
+        inventory.addItemToInventory(itemMap.get(100)!!,(Math.random() * 10).toInt())
         else if(tile is SandTile)
-        inventory.addItemToInventory(Item(101,"Sand","",50),(Math.random() * 10).toInt())
+        inventory.addItemToInventory(itemMap.get(101)!!,(Math.random() * 10).toInt())
     }
 
     fun render(pApplet: PApplet, camera : Camera){

@@ -11,3 +11,10 @@ Server benötigt:
 -Die Map
 -Die Player Coordinaten (in einer Map)
 -Eine Liste mit Sockets
+
+
+Recipe:
+Liste von Recipes erstellen danach prüfung auf mats im inventar und ggf abziehen jeh nach auswahl wird ein string zurück gegeben bzw eine id
+daraufhin wird ein neues Item erstellt
+
+eine Map mit allen game items wird durch eine json datei erstellt

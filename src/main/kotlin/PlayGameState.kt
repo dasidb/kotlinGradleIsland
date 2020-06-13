@@ -2,7 +2,7 @@ import processing.core.PApplet
 import processing.core.PVector
 import processing.event.KeyEvent
 
-//import kotlin.test.todo
+
 
 class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Character) : GameState(pApplet, gameManager){
     val character : Character = character
@@ -13,6 +13,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
     override fun update() {
      //   changeCameraPositionX()
       //  changeCameraPositionY()
+
     }
 
     override fun render() {
@@ -80,7 +81,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
                 gameManager.currentGameState = CraftingGameState(pApplet, gameManager,character.inventory)
 
             if(key == 'e') {
-                character.gatherResources(gameManager.gameMap.gameMap.get(character.mapPosition)!!)
+                character.gatherResources(gameManager.gameMap.gameMap.get(character.mapPosition)!!, gameManager.globalItemMap )
                 character.inventory.playerItemMap.forEach { k, v ->
                     println(v.count.toString() + " " + v.item.name)
                 }
@@ -94,7 +95,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
         var  tmpVec = PVector(character.mapPosition.x, character.mapPosition.y)
        var tile =  gameManager.gameMap.gameMap.get(tmpVec)
 
-        //todo { "wenn character axt ausgewählt hat dann das ele was anderes " }
+
         if(tile is GrassTreeTile) {
             tile = tile.chopTree(tile)
             gameManager.gameMap.gameMap.put(tmpVec, tile!!)

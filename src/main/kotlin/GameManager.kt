@@ -4,16 +4,18 @@ import processing.event.KeyEvent
 
 
 class GameManager(
-    var currentGameState : GameState? = null,
-    var pApplet: PApplet,
-    var hasMapUpdate : Boolean = true
+        var currentGameState : GameState? = null,
+        var pApplet: PApplet,
+        var globalItemMap: MutableMap<Int, Item>,
+        var hasMapUpdate : Boolean = true
 
-){
+        ){
     var increment : Int = 0
     var gameMap : GameMap = GameMap(pApplet)
     var gameStateMap : MutableMap<String, GameState> = HashMap()
     var character : Character = Character(Game.imageMap.get("character")!!)
     var camera : Camera = Camera()
+    lateinit    var  itemMap : HashMap<Integer, Item>
 
    // val GameServerv2 = Server.GameServerv2()
     val gameClientv2 = GameClientv2()
@@ -58,5 +60,7 @@ class GameManager(
     fun keyReleased(event : KeyEvent){
         currentGameState?.keyReleased(event)
     }
+    fun setItemMap(itemMap: MutableMap<Int, Item>) {
 
+    }
 }

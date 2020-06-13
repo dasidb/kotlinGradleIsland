@@ -14,6 +14,8 @@ class Game : PApplet() {
     var i: Int = 0
     var resolutionX: Int = 800;
     var resolutionY: Int = 800
+    val globalItemMap : MutableMap<Int,Item> = HashMap()
+
 
     init {
         //gameManager = GameManager(null, this)
@@ -41,8 +43,10 @@ class Game : PApplet() {
     override fun setup() {
         super.setup()
         loadAssets()
-        gameManager = GameManager(null, this)
-        gameManager?.changeGameState("playGameState", PlayGameState(this, gameManager!!, gameManager!!.character))
+        gameManager = GameManager(null, this,globalItemMap)
+        createItemMap()
+        gameManager?.changeGameState("playGameState", PlayGameState(this, gameManager!!,
+                gameManager!!.character))
        // gameManager?.changeGameState("menuGameState", MenuGameState(this, gameManager!!))
 
         frameRate(60F)
@@ -53,6 +57,17 @@ class Game : PApplet() {
         loop()
 
         //gameManager = GameManager(gameState = GameState())
+    }
+
+    private fun createItemMap() {
+       val jsonArrayList =  loadJSONArray("resources/itemList.json")
+        for(x in 0 until jsonArrayList.size()){
+            var item : JSONObject = jsonArrayList.getJSONObject(x)
+            globalItemMap.put(item.getInt("id"),Item(item.getInt("id"),item.getString("name"),
+                    item.getString("description"),item.getInt("maxStackSize"),item.getString("name")))
+        }
+        kotlin.io.println(globalItemMap.size)
+
     }
 
     override fun draw() {

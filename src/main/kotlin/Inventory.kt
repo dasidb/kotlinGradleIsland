@@ -61,8 +61,8 @@ class Inventory(val playerItemMap : MutableMap<Int, PlayerItem> = HashMap(),
             println(k)
 
             println(v.item.image + " das ist der name")
-            pApplet.image(Game.imageMap.get(v.item.image), (x*50F), 600F)
-            if(v.item.image.equals("wasser"))
+            pApplet.image(Game.imageMap.get(v.item.image.toLowerCase()), (x*50F), 600F)
+            if(v.item.image.equals("Wasser"))
                 pApplet.fill(0F,0F,0F)
             
             pApplet.text(v.count, (x*50F), 650F)
