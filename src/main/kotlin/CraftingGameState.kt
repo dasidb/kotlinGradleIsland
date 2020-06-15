@@ -7,11 +7,14 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
 ) {
     var selection: Int = 0
     val craftingList: MutableList<Recipe>
-    var enougMats = true
+
+    val craft = Craft(inventory)
 
     init {
-        craftingList = ArrayList()
-        createRecipeList()
+        print(craft.craftingList)
+        craftingList = craft.craftingList
+        print(craftingList)
+
     }
 
 
@@ -27,45 +30,8 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
 
     }
 
-    fun createRecipeList() {
-        val testList: MutableList<CraftCost> = ArrayList()
-        testList.add(CraftCost(103, 5))
-        testList.add(CraftCost(100, 4))
-        craftingList.add(Recipe("Tent", testList, 301))
-        val testList2: MutableList<CraftCost> = ArrayList()
-        testList2.add(CraftCost(103, 5))
-        testList2.add(CraftCost(100, 1))
-        craftingList.add(Recipe("Axe", testList2, 400))
-        val testList3: MutableList<CraftCost> = ArrayList()
-        testList3.add(CraftCost(102, 5))
-        testList3.add(CraftCost(100, 2))
-        craftingList.add(Recipe("House", testList3, 300))
 
-    }
 
-    fun craftItem(itemName: String) {
-        craftingList.forEach {
-            if (it.name == itemName) {
-                enougMats = true
-                checkIfEnougMats(it)
-                if(enougMats) {
-                    inventory.addItemToInventory(gameManager.globalItemMap.get(it.itemID)!!, 1)
-                    println("added 1 " + itemName)
-                }
-            }
-        }
-
-    }
-
-    private fun checkIfEnougMats(recipe: Recipe) {
-        recipe.craftCostList.forEach {
-            if (inventory.playerItemMap.containsKey(it.itemId) && inventory.playerItemMap.get(it.itemId)?.count!! >= it.amount)
-            else {
-                enougMats = false
-            }
-
-        }
-    }
     fun craftingMenu() {
         for (x in 0 until 5) {
             for (y in 0 until 5) {
@@ -117,7 +83,7 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
         println("kommt an")
         if (keyPressed) {
             if (key == 'w' && selection < 9) {
-                craftItem("House")
+                craft.craftItem("House")
                 selection += 1
                 println("kommt in an ")
             }
