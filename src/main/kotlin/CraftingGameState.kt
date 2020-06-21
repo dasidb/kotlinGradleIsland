@@ -8,7 +8,7 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
     var selection: Int = 0
     val craftingList: MutableList<Recipe>
 
-    val craft = Craft(inventory)
+    val craft = Craft(inventory, gameManager.globalItemMap)
 
     init {
         print(craft.craftingList)
@@ -80,7 +80,6 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
     }
 
     fun keyInput(key: Char, keyCode: Int, keyPressed: Boolean) {
-        println("kommt an")
         if (keyPressed) {
             if (key == 'w' && selection < 9) {
                 craft.craftItem("House")

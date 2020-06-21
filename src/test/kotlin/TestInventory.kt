@@ -8,21 +8,21 @@ class TestInventory (){
     @Test
     fun addMoreThanMaxStackSize(){
         val inventory = Inventory()
-        inventory.addItemToInventory(Item(0,"Wood","",29),35)
+        inventory.addItemToInventory(Item(0, "Wood", "", 29),35)
         assertEquals(29,inventory.playerItemMap.get(0)?.count)
     }
     
     @Test
     fun addItemToInventoryInASpecificAmount(){
         val inventory = Inventory()
-        inventory.addItemToInventory(Item(0,"Wood","",20),5)
+        inventory.addItemToInventory(Item(0, "Wood", "", 20),5)
         assertEquals(5,inventory.playerItemMap.get(0)?.count)
     }
 
     @Test
     fun addItemToInventory(){
         val inventory = Inventory()
-        inventory.addItemToInventory(Item(0,"Wood","",20),5)
+        inventory.addItemToInventory(Item(0, "Wood", "", 20),5)
         assertEquals(1,inventory.playerItemMap.size)
     }
 
@@ -37,7 +37,7 @@ class TestInventory (){
     @Test
     fun cantremoveItemFromInventory(){
         var inventory = Inventory()
-        var item1 = Item(0,"Wood","",20)
+        var item1 = Item(0, "Wood", "", 20)
         inventory.addItemToInventory(item1,20)
         inventory.removeItemFromInventory(item1,25)
         assertEquals(20,inventory.playerItemMap.get(0)?.count)
@@ -54,7 +54,7 @@ class TestInventory (){
     @Test
     fun removeItemAmountFromInventory(){
         var inventory = Inventory()
-        var item1 = Item(0,"Wood","",20)
+        var item1 = Item(0, "Wood", "", 20)
         inventory.addItemToInventory(item1,20)
         inventory.removeItemFromInventory(item1,15)
         assertEquals(5,inventory.playerItemMap.get(0)?.count)

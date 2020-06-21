@@ -1,13 +1,15 @@
-class Craft (val inventory: Inventory){
+class Craft (val inventory: Inventory,
+val globalItemMap: MutableMap<Int, Item>){
     val craftingList: MutableList<Recipe>
     var enougMats = true
+
 
     init {
         craftingList = ArrayList()
         createRecipeList()
     }
 
-    fun craftItem(itemName: String, globalItemMap : MutableMap<Int, Item>) {
+    fun craftItem(itemName: String) {
         craftingList.forEach {
             if (it.name == itemName) {
                 enougMats = true
@@ -27,7 +29,13 @@ class Craft (val inventory: Inventory){
             else {
                 enougMats = false
             }
-
+        }
+        if(enougMats){
+            recipe.craftCostList.forEach{
+                println(it.itemId)
+                println(globalItemMap.get(it.itemId))
+                inventory.removeItemFromInventory(globalItemMap.get(it.itemId)!!,it.amount)
+            }
         }
     }
 
