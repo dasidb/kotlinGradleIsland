@@ -11,7 +11,8 @@ val globalItemMap: MutableMap<Int, Item>){
 
     fun craftItem(itemName: String) {
         craftingList.forEach {
-            if (it.name == itemName) {
+            if (it.name.equals(itemName)) {
+
                 enougMats = true
                 checkIfEnougMats(it)
                 if(enougMats) {
