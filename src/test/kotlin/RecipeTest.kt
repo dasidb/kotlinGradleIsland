@@ -1,19 +1,23 @@
 //import kotlin.test.assertEquals
 //import kotlin.test.assertTrue
+import com.google.gson.Gson
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
-import org.json.simple.parser.JSONParser
 import org.junit.Test
+import processing.data.JSONObject
+import java.io.BufferedReader
 import java.io.FileReader
 import kotlin.test.todo
+import org.assertj.core.api.Assertions.*
+
 
 class RecipeTest {
 
 
     @Test
     fun craftItemWithNoRessourcesLeft(){
-        val globalItemMap  = HashMap<Int, Item>()
-        createItemMap(globalItemMap)
+        val globalItemMap  = createItemMap1()
+
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(102, 5))
@@ -34,8 +38,8 @@ class RecipeTest {
     }
     @Test
     fun craftItemWithOneRessourcesLeft(){
-        val globalItemMap  = HashMap<Int, Item>()
-        createItemMap(globalItemMap)
+        val globalItemMap  = createItemMap1()
+
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(102, 5))
@@ -56,8 +60,8 @@ class RecipeTest {
 
     @Test
     fun craftItemWithTwoRessourcesLeft(){
-        val globalItemMap  = HashMap<Int, Item>()
-        createItemMap(globalItemMap)
+        val globalItemMap  = createItemMap1()
+
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(102, 5))
@@ -78,8 +82,8 @@ class RecipeTest {
 
     @Test
     fun craftItemNotenougRessoruces(){
-        val globalItemMap  = HashMap<Int, Item>()
-        createItemMap(globalItemMap)
+        val globalItemMap  = createItemMap1()
+
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(102, 5))
@@ -102,37 +106,31 @@ class RecipeTest {
         assertTrue(true)
     }
 
-    private fun createItemMap(globalItemMap : HashMap<Int, Item>) {
-        todo { "read data from json" }
-        val jsonParser =JSONParser().parse(FileReader("resources/itemList.json"))
-        var jsonArray : org.json.simple.JSONArray = jsonParser as org.json.simple.JSONArray
-      //  print(jsonArray)
-        val iterator  = jsonArray.iterator()
-
-        while (iterator.hasNext()) {
-           val itr1 = (iterator.next() as Map<*, *>)//.entries.iterator()
-            println(itr1.get("id"))
-            //val test : Long = itr1.get("id")
-          //  val test1 : Int =
-            print("success")
-
-                //println(pair.key.toString() + " : " + pair.value)
-          //   globalItemMap.put(itr1.get("id") as Int,Item(itr1.get("id") as Int, itr1.get("name") as String, itr1.get("description") as String, itr1.get("maxStackSize") as Int))
-
-        }
-        println(globalItemMap.size)
-        globalItemMap.put(102,Item(102,"Wasser","das ist eine description",5))
-        globalItemMap.put(100,Item(100,"Gras","das ist eine description",5))
-        globalItemMap.put(103,Item(103,"Holz","das ist eine description",5))
-        globalItemMap.put(300,Item(300,"House","das ist eine description",5))
-        globalItemMap.put(301,Item(301,"Tent","das ist eine description",5))
-
+    @Test
+    fun isItemMapSizeOf7(){
+        assertEquals(7,createItemMap1().size)
 
     }
+
+    private fun createItemMap1() : MutableMap<Int,Item> {
+        val globalItemMap: MutableMap<Int, Item> = HashMap()
+        val path = "resources/itemList.json"
+        val bufferedReader = BufferedReader(FileReader(path))
+
+        val gson = Gson()
+        var jsonObjectList: Array<Item>? = gson.fromJson(bufferedReader, Array<Item>::class.java)
+        jsonObjectList!!.asList()
+        jsonObjectList.forEach {
+            globalItemMap.put(it.id, it)
+        }
+    return globalItemMap
+    }
+
+
 @Test
      fun craftItemByNameItemIsTent(){
-        val globalItemMap  = HashMap<Int, Item>()
-        createItemMap(globalItemMap)
+        val globalItemMap  = createItemMap1()
+
         val inventory = Inventory()
         // Ressourcetypes a Tent needs to craft
         inventory.addItemToInventory(Item(103,"a","a",50,"a"),30)
