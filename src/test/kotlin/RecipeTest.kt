@@ -1,9 +1,9 @@
 //import kotlin.test.assertEquals
 //import kotlin.test.assertTrue
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertTrue
 import org.json.simple.parser.JSONParser
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import java.io.FileReader
 import kotlin.test.todo
 
@@ -97,8 +97,10 @@ class RecipeTest {
 
         assertEquals(2, inventory.playerItemMap.size)
     }
-
-
+    @Test
+    fun setup(){
+        assertTrue(true)
+    }
 
     private fun createItemMap(globalItemMap : HashMap<Int, Item>) {
         todo { "read data from json" }

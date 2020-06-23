@@ -1,4 +1,5 @@
-import org.junit.jupiter.api.Test
+
+import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 

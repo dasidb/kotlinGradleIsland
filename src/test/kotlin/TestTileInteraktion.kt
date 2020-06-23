@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test
+
 import processing.core.PImage
 import kotlin.test.assertEquals
 

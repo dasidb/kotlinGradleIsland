@@ -13,8 +13,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     // https://mvnrepository.com/artifact/org.processing/core
     compile group: 'org.processing', name: 'core', version: '3.3.7'
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-    compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0'
+    // https://mvnrepository.com/artifact/junit/junit
+    testCompile group: 'junit', name: 'junit', version: '4.13'
+    // https://mvnrepository.com/artifact/org.assertj/assertj-core
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.16.1'
 // https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-test
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: '1.1.51'
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
