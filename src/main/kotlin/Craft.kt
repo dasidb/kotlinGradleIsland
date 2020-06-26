@@ -55,4 +55,10 @@ val globalItemMap: MutableMap<Int, Item>){
         craftingList.add(Recipe("House", testList3, 300))
 
     }
+
+    fun craftItemByID(recipe: Recipe) {
+   // inventory.addItemToInventory(globalItemMap.get(recipe.itemID)!!,5)
+        craftItem(recipe.name)
+
+    }
 }

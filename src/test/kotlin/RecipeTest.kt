@@ -1,8 +1,8 @@
 //import kotlin.test.assertEquals
 //import kotlin.test.assertTrue
 import com.google.gson.Gson
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
+//import junit.framework.Assert.assertEquals
+//import junit.framework.Assert.assertTrue
 import org.junit.Test
 import processing.data.JSONObject
 import java.io.BufferedReader
@@ -34,7 +34,7 @@ class RecipeTest {
         val craft = Craft(inventory,globalItemMap)
         craft.craftItem("House")
 
-        assertEquals(1,inventory.playerItemMap.size)
+        assertThat(inventory.playerItemMap.size).isEqualTo(1)
     }
     @Test
     fun craftItemWithOneRessourcesLeft(){
@@ -55,7 +55,7 @@ class RecipeTest {
         val craft = Craft(inventory,globalItemMap)
         craft.craftItem("House")
 
-        assertEquals(2,inventory.playerItemMap.size)
+        assertThat(inventory.playerItemMap.size).isEqualTo(2)
     }
 
     @Test
@@ -77,7 +77,7 @@ class RecipeTest {
         val craft = Craft(inventory,globalItemMap)
         craft.craftItem("House")
 
-        assertEquals(3,inventory.playerItemMap.size)
+        assertThat(inventory.playerItemMap.size).isEqualTo(3)
     }
 
     @Test
@@ -99,16 +99,16 @@ class RecipeTest {
         val craft = Craft(inventory,globalItemMap)
         craft.craftItem("House")
 
-        assertEquals(2, inventory.playerItemMap.size)
+        assertThat(inventory.playerItemMap.size).isEqualTo(2)
     }
     @Test
     fun setup(){
-        assertTrue(true)
+        assertThat(true).isTrue()
     }
 
     @Test
     fun isItemMapSizeOf7(){
-        assertEquals(7,createItemMap1().size)
+        assertThat(createItemMap1().size).isEqualTo(7)
 
     }
 
@@ -126,6 +126,20 @@ class RecipeTest {
     return globalItemMap
     }
 
+    private fun createCraftingList() : MutableList<Recipe>{
+        val craftingList: MutableList<Recipe> = ArrayList()
+        val testList3: MutableList<CraftCost> = ArrayList()
+        testList3.add(CraftCost(102, 5))
+        testList3.add(CraftCost(100, 2))
+        craftingList.add(Recipe("Tent", testList3, 301))
+        val testList4: MutableList<CraftCost> = ArrayList()
+        testList4.add(CraftCost(102, 5))
+        testList4.add(CraftCost(100, 2))
+        craftingList.add(Recipe("House", testList4, 300))
+
+        return craftingList
+    }
+
 
 @Test
      fun craftItemByNameItemIsTent(){
@@ -141,11 +155,51 @@ class RecipeTest {
         craft.craftItem("Tent")
 
 
-        assertTrue(inventory.playerItemMap.containsKey(301))
+        assertThat(inventory.playerItemMap.containsKey(301)).isTrue()
 
 
 
     }
+@Test
+    fun CraftHouseByID(){
+        val globalItemMap  = createItemMap1()
+
+        val craftingList = createCraftingList()
+
+        val inventory = Inventory()
+        inventory.addItemToInventory(Item(102,"a","a",50,"a"),40)
+        inventory.addItemToInventory(Item(100,"a","a",50,"a"),40)
+        // inventory.addItemToInventory()
+
+        // Craft.craft(inventory, "House"
+        val craft = Craft(inventory,globalItemMap)
+        craft.craftItemByID(craftingList.get(1))
+
+       assertThat(inventory.playerItemMap.contains(300)).isTrue()
+
+    }
+@Test
+    fun CraftTentByID(){
+        val globalItemMap  = createItemMap1()
+
+        val craftingList = createCraftingList()
+
+        val inventory = Inventory()
+        inventory.addItemToInventory(Item(103,"a","a",50,"a"),40)
+        inventory.addItemToInventory(Item(100,"a","a",50,"a"),40)
+        // inventory.addItemToInventory()
+
+        // Craft.craft(inventory, "House"
+        val craft = Craft(inventory,globalItemMap)
+    todo { "Choose item by selector value" }
+        craft.craftItemByID(craftingList.get(0))
+
+        assertThat(inventory.playerItemMap.contains(301)).isTrue()
+
+    }
+
+
+
 
 
 
