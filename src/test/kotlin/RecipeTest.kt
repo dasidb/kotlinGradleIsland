@@ -4,7 +4,6 @@ import com.google.gson.Gson
 //import junit.framework.Assert.assertEquals
 //import junit.framework.Assert.assertTrue
 import org.junit.Test
-import processing.data.JSONObject
 import java.io.BufferedReader
 import java.io.FileReader
 import kotlin.test.todo
@@ -126,6 +125,22 @@ class RecipeTest {
     return globalItemMap
     }
 
+    @Test
+     fun createRecipeList()  {
+        val globalRecipeList: MutableList<Recipe> = ArrayList()
+        val path = "resources/recipeList.json"
+        val bufferedReader = BufferedReader(FileReader(path))
+
+        val gson = Gson()
+        var jsonObjectList = gson.fromJson(bufferedReader, Array<Recipe>::class.java)
+        jsonObjectList!!.asList()
+        jsonObjectList.forEach {
+           //println(it.craftCostList[0].itemId)
+            globalRecipeList.add(it)
+        }
+    print(globalRecipeList.get(1).name)
+    }
+
     private fun createCraftingList() : MutableList<Recipe>{
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
@@ -173,7 +188,7 @@ class RecipeTest {
 
         // Craft.craft(inventory, "House"
         val craft = Craft(inventory,globalItemMap)
-        craft.craftItemByID(craftingList.get(1))
+        craft.craftItemByID(2)
 
        assertThat(inventory.playerItemMap.contains(300)).isTrue()
 
@@ -192,7 +207,7 @@ class RecipeTest {
         // Craft.craft(inventory, "House"
         val craft = Craft(inventory,globalItemMap)
     todo { "Choose item by selector value" }
-        craft.craftItemByID(craftingList.get(0))
+        craft.craftItemByID(0)
 
         assertThat(inventory.playerItemMap.contains(301)).isTrue()
 

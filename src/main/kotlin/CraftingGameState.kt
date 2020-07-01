@@ -81,13 +81,19 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
 
     fun keyInput(key: Char, keyCode: Int, keyPressed: Boolean) {
         if (keyPressed) {
+            println(selection)
             if (key == 'w' && selection < 9) {
-                craft.craftItem("House")
                 selection += 1
-                println("kommt in an ")
             }
             if(key == 's' && selection > 0) {
                 selection -= 1
+            }
+            if(key == PApplet.ENTER){
+                craft.craftItemByID(selection)
+                println(inventory.playerItemMap.size.toString() + " das ist size")
+            }
+            if (key == 'b') {
+                gameManager.currentGameState = gameManager.gameStateMap.get("playGameState")
             }
         }
     }

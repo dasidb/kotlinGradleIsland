@@ -1,12 +1,18 @@
+import com.google.gson.Gson
+import java.io.BufferedReader
+import java.io.FileReader
+import java.lang.Exception
+import java.lang.IndexOutOfBoundsException
+
 class Craft (val inventory: Inventory,
-val globalItemMap: MutableMap<Int, Item>){
+             val globalItemMap: MutableMap<Int, Item>){
     val craftingList: MutableList<Recipe>
     var enougMats = true
 
 
     init {
-        craftingList = ArrayList()
-        createRecipeList()
+        craftingList = createRecipeList1()
+        //createRecipeList()
     }
 
     fun craftItem(itemName: String) {
@@ -56,9 +62,27 @@ val globalItemMap: MutableMap<Int, Item>){
 
     }
 
-    fun craftItemByID(recipe: Recipe) {
-   // inventory.addItemToInventory(globalItemMap.get(recipe.itemID)!!,5)
-        craftItem(recipe.name)
+     fun createRecipeList1() : MutableList<Recipe> {
+        val globalRecipeList: MutableList<Recipe> = ArrayList()
+        val path = "resources/recipeList.json"
+        val bufferedReader = BufferedReader(FileReader(path))
 
+        val gson = Gson()
+        var jsonObjectList = gson.fromJson(bufferedReader, Array<Recipe>::class.java)
+        jsonObjectList!!.asList()
+        jsonObjectList.forEach {
+            globalRecipeList.add(it)
+            print(it)
+        }
+        return globalRecipeList
+    }
+
+    fun craftItemByID(selector: Int) {
+        try {
+            craftItem(craftingList.get(selector).name)
+
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
     }
 }
