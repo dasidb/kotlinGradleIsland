@@ -40,7 +40,7 @@ class TestInventory (){
         var inventory = Inventory()
         var item1 = Item(0, "Wood", "", 20)
         inventory.addItemToInventory(item1,20)
-        inventory.removeItemFromInventory(item1,25)
+        inventory.removeMatsFromInventory(item1,25)
         assertEquals(20,inventory.playerItemMap.get(0)?.count)
     }
 
@@ -49,7 +49,7 @@ class TestInventory (){
         var inventory = Inventory()
         var item1 = Item(0, "Wood", "", 20)
         inventory.addItemToInventory(item1, 20)
-        inventory.removeItemFromInventory(item1, 20)
+        inventory.removeMatsFromInventory(item1, 20)
         assertNull(inventory.playerItemMap.get(item1.id))
     }
     @Test
@@ -57,7 +57,7 @@ class TestInventory (){
         var inventory = Inventory()
         var item1 = Item(0, "Wood", "", 20)
         inventory.addItemToInventory(item1,20)
-        inventory.removeItemFromInventory(item1,15)
+        inventory.removeMatsFromInventory(item1,15)
         assertEquals(5,inventory.playerItemMap.get(0)?.count)
     }
 

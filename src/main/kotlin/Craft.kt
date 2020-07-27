@@ -1,11 +1,12 @@
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.FileReader
-import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 
-class Craft (val inventory: Inventory,
-             val globalItemMap: MutableMap<Int, Item>){
+class Craft(
+    val inventory: Inventory,
+    val globalItemMap: MutableMap<Int, Item>
+) {
     val craftingList: MutableList<Recipe>
     var enougMats = true
 
@@ -18,51 +19,43 @@ class Craft (val inventory: Inventory,
     fun craftItem(itemName: String) {
         craftingList.forEach {
             if (it.name.equals(itemName)) {
-
-                enougMats = true
-                checkIfEnougMats(it)
-                if(enougMats) {
-                    inventory.addItemToInventory(globalItemMap.get(it.itemID)!!, 1)
-                    println("added 1 " + itemName)
+                if (checkIfMaxStackSize(it)) {
+                    if (checkIfEnougMats(it)) {
+                        inventory.addItemToInventory(globalItemMap.get(it.itemID)!!, 1)
+                        println("added 1 " + itemName)
+                    }
                 }
             }
         }
 
     }
 
-    private fun checkIfEnougMats(recipe: Recipe) {
+    private fun checkIfMaxStackSize(recipe: Recipe): Boolean {
+        if (inventory.playerItemMap.containsKey(recipe.itemID)) {
+            return inventory.playerItemMap.get(recipe.itemID)?.item?.maxStackSize!! >
+                    inventory.playerItemMap.get(recipe.itemID)?.count!!
+        } else
+            return true
+
+
+    }
+
+    private fun checkIfEnougMats(recipe: Recipe): Boolean {
         recipe.craftCostList.forEach {
             if (inventory.playerItemMap.containsKey(it.itemId) && inventory.playerItemMap.get(it.itemId)?.count!! >= it.amount)
             else {
-                enougMats = false
+                return false
             }
         }
-        if(enougMats){
-            recipe.craftCostList.forEach{
-                println(it.itemId)
-                println(globalItemMap.get(it.itemId))
-                inventory.removeItemFromInventory(globalItemMap.get(it.itemId)!!,it.amount)
+        if (enougMats) {
+            recipe.craftCostList.forEach {
+                inventory.removeMatsFromInventory(globalItemMap.get(it.itemId)!!, it.amount)
             }
         }
+        return true
     }
 
-    fun createRecipeList()  {
-        val testList: MutableList<CraftCost> = ArrayList()
-        testList.add(CraftCost(103, 5))
-        testList.add(CraftCost(100, 4))
-        craftingList.add(Recipe("Tent", testList, 301))
-        val testList2: MutableList<CraftCost> = ArrayList()
-        testList2.add(CraftCost(103, 5))
-        testList2.add(CraftCost(100, 1))
-        craftingList.add(Recipe("Axe", testList2, 400))
-        val testList3: MutableList<CraftCost> = ArrayList()
-        testList3.add(CraftCost(102, 5))
-        testList3.add(CraftCost(100, 2))
-        craftingList.add(Recipe("House", testList3, 300))
-
-    }
-
-     fun createRecipeList1() : MutableList<Recipe> {
+    fun createRecipeList1(): MutableList<Recipe> {
         val globalRecipeList: MutableList<Recipe> = ArrayList()
         val path = "resources/recipeList.json"
         val bufferedReader = BufferedReader(FileReader(path))
@@ -72,7 +65,7 @@ class Craft (val inventory: Inventory,
         jsonObjectList!!.asList()
         jsonObjectList.forEach {
             globalRecipeList.add(it)
-            print(it)
+
         }
         return globalRecipeList
     }
@@ -81,7 +74,7 @@ class Craft (val inventory: Inventory,
         try {
             craftItem(craftingList.get(selector).name)
 
-        }catch (e : Exception){
+        } catch (e: IndexOutOfBoundsException) {
             e.printStackTrace()
         }
     }
