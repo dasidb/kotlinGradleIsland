@@ -19,6 +19,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
 
     override fun render() {
         character.render(pApplet, gameManager.camera)
+        buildManager.render(pApplet)
     }
 
     fun changeCameraPositionX(){

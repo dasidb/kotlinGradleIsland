@@ -29,6 +29,7 @@ public class TestBuildItem {
 
     }
 
+@Test
     public void placeHouseBuildListEqual1() {
         Inventory inventory = new Inventory();
         PlayGameState playGameState = new PlayGameState(new PApplet(),null, new Character(null));
@@ -37,6 +38,6 @@ public class TestBuildItem {
 
         playGameState.getBuildManager().build(inventory.getPlayerItemMap().get(300), new PVector(50, 50));
 
-        assertThat(playGameState.getBuildList.size).isEqualTo(1);
+        assertThat(playGameState.getBuildManager().getBuildList.size()).isEqualTo(1);
     }
 }
