@@ -1,0 +1,42 @@
+[{"name":"Tent",
+  "craftCostList":[
+    {
+      "itemId":103,
+      "amount":5
+    },
+    {
+      "itemId":100,
+      "amount":4
+    }
+  ],
+  "itemID":301
+},
+  {"name": "Axe",
+    "craftCostList": [
+      {
+        "itemId": 103,
+        "amount": 5
+      },
+      {
+        "itemId": 100,
+        "amount": 1
+      }
+    ],
+    "itemID": 400
+
+  },
+
+  {"name": "House",
+    "craftCostList": [
+      {
+        "itemId": 102,
+        "amount": 5
+      },
+      {
+        "itemId": 100,
+        "amount": 2
+      }
+    ],
+    "itemID": 300
+  }
+]

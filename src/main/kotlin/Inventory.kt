@@ -32,22 +32,24 @@ class Inventory(val playerItemMap : MutableMap<Int, PlayerItem> = HashMap(),
 
     }
 
-    fun removeItemFromInventory(item : Item, amount : Int) : Boolean{
+    fun removeMatsFromInventory(item : Item, amount : Int) : Boolean{
 
         if(playerItemMap.containsKey(item.id)) {
             //var item = playerItemMap.get(item.id)
             if(playerItemMap.get(item.id)!!.count == amount) {
                 playerItemMap.remove(item.id)
                 return true
-            }else if (playerItemMap.get(item.id)!!.count > amount)
-            playerItemMap.get(item.id)?.removeItem(amount)
+            }else if (playerItemMap.get(item.id)!!.count > amount) {
+                playerItemMap.get(item.id)?.removeItem(amount)
+            return true
+            }
             else
                 println("Item konnte nicht entfernt werden")
                 return false
                // println("Item konnte nicht entfernt werden" + currentStackTrace()[0])
         }
 
-        return false
+    return false
     }
 
     fun render(pApplet: PApplet){
@@ -71,6 +73,13 @@ class Inventory(val playerItemMap : MutableMap<Int, PlayerItem> = HashMap(),
 
             x++
         }
+    }
+
+    fun placeItem(playerItem: PlayerItem) {
+        if (removeMatsFromInventory(playerItem.item, 1)) {
+
+        }
+
     }
 
 

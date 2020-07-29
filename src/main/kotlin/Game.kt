@@ -128,6 +128,13 @@ class Game : PApplet() {
         image = loadImage("assets/sand.jpg")
         image.resize(50,50)
         imageMap.put("sand",image)
+        image = loadImage("assets/axe.jpg")
+        image.resize(50,50)
+        imageMap.put("axe",image)
+        image = loadImage("assets/house.jpg")
+        image.resize(50,50)
+        imageMap.put("house",image)
+
     }
 
     fun test(){
