@@ -6,6 +6,7 @@ import processing.event.KeyEvent
 
 class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Character) : GameState(pApplet, gameManager){
     val character : Character = character
+    val buildManager : BuildManager = BuildManager()
     init {
 
     }

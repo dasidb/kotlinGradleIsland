@@ -1,7 +1,6 @@
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
+import processing.core.PApplet;
+import processing.core.PVector;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -24,15 +23,20 @@ public class TestBuildItem {
         Inventory inventory = new Inventory();
         inventory.addItemToInventory(new Item(300, "House", "a", 50, "a"), 1);
         inventory.placeItem(inventory.getPlayerItemMap().get(300));
+        BuildManager buildManager = new BuildManager();
+        buildManager.build(inventory.getPlayerItemMap().get(300), new PVector(50, 50));
         assertThat(inventory.getPlayerItemMap().size()).isEqualTo(0);
+
     }
 
-    @Test
-    public void trueFromBuildManager() {
-        BuildManager buildManager = new BuildManager();
+    public void placeHouseBuildListEqual1() {
         Inventory inventory = new Inventory();
+        PlayGameState playGameState = new PlayGameState(new PApplet(),null, new Character(null));
         inventory.addItemToInventory(new Item(300, "House", "a", 50, "a"), 1);
+        inventory.placeItem(inventory.getPlayerItemMap().get(300));
 
-        assertThat(buildManager.build(inventory.getPlayerItemMap().get(300))).isEqualTo(true);
+        playGameState.getBuildManager().build(inventory.getPlayerItemMap().get(300), new PVector(50, 50));
+
+        assertThat(playGameState.getBuildList.size).isEqualTo(1);
     }
 }
