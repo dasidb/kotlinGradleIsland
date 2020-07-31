@@ -1,0 +1,30 @@
+@startuml
+
+Tile <|-- WaterTile
+Tile <|-- GrassTile
+Tile <|-- GrassTreeTile
+Tile <|-- SandTile
+
+GameState <|-- PlayGameState
+GameState <|-- MenuGameState
+GameState <|-- CraftingGameState
+
+Character o-- Inventory
+GameManager o-- BuildManager
+PlayGameState o-- Character
+Inventory o-- Item
+
+Recipe *-- CraftCost
+Item *-- PlayerItem
+CraftingGameState *-- Craft
+
+
+Game -- GameManager
+GameManager -- GameMap
+GameManager -- Camera
+GameManager -- GameState
+GameMap -- Tile
+Craft -- Recipe
+
+@enduml
+
