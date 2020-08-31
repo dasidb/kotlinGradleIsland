@@ -1,4 +1,6 @@
-public interface Renderable {
+public abstract class Renderable {
 
-     void render();
+     private int posX;
+     private int posY;
+      private String img;
 }
