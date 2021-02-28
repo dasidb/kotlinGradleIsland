@@ -106,7 +106,7 @@ class RecipeTest {
 
     }
 
-    private fun createCraftingList(): MutableList<Recipe> {
+  /*  private fun createCraftingList(): MutableList<Recipe> {
         val craftingList: MutableList<Recipe> = ArrayList()
         val testList3: MutableList<CraftCost> = ArrayList()
         testList3.add(CraftCost(102, 5))
@@ -119,7 +119,7 @@ class RecipeTest {
 
         return craftingList
     }
-
+ */
 
     @Test
     fun craftItemByNameItemIsTent() {

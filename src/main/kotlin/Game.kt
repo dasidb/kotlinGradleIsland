@@ -45,6 +45,9 @@ class Game : PApplet() {
         loadAssets()
         gameManager = GameManager(null, this,globalItemMap)
         createItemMap()
+        Renderer.getInstance().setPapplet(this)
+        Renderer.getInstance().setImageMap(imageMap)
+
         gameManager?.changeGameState("playGameState", PlayGameState(this, gameManager!!,
                 gameManager!!.character))
        // gameManager?.changeGameState("menuGameState", MenuGameState(this, gameManager!!))
@@ -66,7 +69,7 @@ class Game : PApplet() {
             globalItemMap.put(item.getInt("id"),Item(item.getInt("id"),item.getString("name"),
                     item.getString("description"),item.getInt("maxStackSize"),item.getString("name")))
         }
-        kotlin.io.println(globalItemMap.size)
+
 
     }
 
@@ -108,6 +111,10 @@ class Game : PApplet() {
         imageMap.put("waterTile", image)
         image = loadImage("assets/sandTile.png")
         imageMap.put("sandTile", image)
+        image = loadImage("assets/grassTreeTile.png")
+        imageMap.put("grassTreeTile", image)
+        image = loadImage("assets/dustTile.png")
+        imageMap.put("dustTile", image)
     }
 
     fun  loadEntityAssets(){
@@ -134,6 +141,9 @@ class Game : PApplet() {
         image = loadImage("assets/house.jpg")
         image.resize(50,50)
         imageMap.put("house",image)
+        image = loadImage("assets/tent.jpg")
+        image.resize(50,50)
+        imageMap.put("tent",image)
 
     }
 
@@ -142,7 +152,7 @@ class Game : PApplet() {
 
 
         var jsonTest = json.getJSONObject(1)
-        print(jsonTest)
+
    //     json.setInt("id", 0);
      //   json.setString("species", "Panthera leo");
      //   json.setString("name", "Lion");

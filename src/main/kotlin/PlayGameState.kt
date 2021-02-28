@@ -84,6 +84,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
 
             if(key == 'e') {
                 character.gatherResources(gameManager.gameMap.gameMap.get(character.mapPosition)!!, gameManager.globalItemMap )
+                interactionDependingOnTile()
                 character.inventory.playerItemMap.forEach { k, v ->
                     println(v.count.toString() + " " + v.item.name)
                 }
@@ -93,7 +94,7 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
     }
 
     fun interactionDependingOnTile(){
-        println(character.mapPosition)
+
         var  tmpVec = PVector(character.mapPosition.x, character.mapPosition.y)
        var tile =  gameManager.gameMap.gameMap.get(tmpVec)
 
@@ -101,12 +102,21 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
         if(tile is GrassTreeTile) {
             tile = tile.chopTree(tile)
             gameManager.gameMap.gameMap.put(tmpVec, tile!!)
+            println("Baum gefällt")
 
+        }
+       else if(tile is DustTile){
+            println(tile.lasttimeHarvested)
         }
        else if(tile is WaterTile)
             println("bla")
-        else if(tile is GrassTile)
-            println("blabla")
+        else if(tile is GrassTile) {
+            tile = tile.harvest(tile)
+            gameManager.gameMap.gameMap.put(tmpVec, tile!!)
+            if(tile.setlastTimeHarvested() == null)
+            tile.setlastTimeHarvested()
+            println("Gras geerntet")
+        }
         else if(tile is SandTile)
             println("blablabla")
         else

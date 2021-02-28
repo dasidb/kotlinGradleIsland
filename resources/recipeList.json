@@ -2,11 +2,13 @@
   "craftCostList":[
     {
       "itemId":103,
-      "amount":5
+      "amount":5,
+      "name": "Wood"
     },
     {
       "itemId":100,
-      "amount":4
+      "amount":4,
+      "name": "Gras"
     }
   ],
   "itemID":301
@@ -15,11 +17,13 @@
     "craftCostList": [
       {
         "itemId": 103,
-        "amount": 5
+        "amount": 5,
+        "name": "Wood"
       },
       {
         "itemId": 100,
-        "amount": 1
+        "amount": 1,
+        "name": "Gras"
       }
     ],
     "itemID": 400
@@ -30,11 +34,13 @@
     "craftCostList": [
       {
         "itemId": 102,
-        "amount": 5
+        "amount": 5,
+        "name": "Wasser"
       },
       {
         "itemId": 100,
-        "amount": 2
+        "amount": 2,
+        "name": "Gras"
       }
     ],
     "itemID": 300

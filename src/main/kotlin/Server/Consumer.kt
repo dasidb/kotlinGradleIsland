@@ -19,7 +19,7 @@ class Consumer(val queue: Queue<String>, name : String, val sleepTime : Int, var
             try {
 
             if(!queue.isEmpty()) {
-                println("fml")
+
                 validateMovement(queue.poll())
 
             }else{

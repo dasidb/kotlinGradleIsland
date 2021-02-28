@@ -1,4 +1,4 @@
-import processing.core.PImage
+import java.time.LocalDateTime
 
 open abstract class Tile(
 
@@ -7,7 +7,12 @@ open abstract class Tile(
     var cordY: Float
 
 
-) {
 
+){
+    var lasttimeHarvested : LocalDateTime? = null
+
+fun setlastTimeHarvested(){
+    lasttimeHarvested = LocalDateTime.now()
+}
 
 }

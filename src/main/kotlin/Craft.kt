@@ -16,18 +16,21 @@ class Craft(
         //createRecipeList()
     }
 
-    fun craftItem(itemName: String) {
+    fun craftItem(itemName: String) :Boolean {
         craftingList.forEach {
             if (it.name.equals(itemName)) {
                 if (checkIfMaxStackSize(it)) {
                     if (checkIfEnougMats(it)) {
                         inventory.addItemToInventory(globalItemMap.get(it.itemID)!!, 1)
                         println("added 1 " + itemName)
+                        return true
                     }
+                    return false
                 }
+                return false
             }
         }
-
+        return false
     }
 
     private fun checkIfMaxStackSize(recipe: Recipe): Boolean {
@@ -70,12 +73,13 @@ class Craft(
         return globalRecipeList
     }
 
-    fun craftItemByID(selector: Int) {
+    fun craftItemByID(selector: Int) : Boolean {
         try {
-            craftItem(craftingList.get(selector).name)
+            return craftItem(craftingList.get(selector).name)
 
         } catch (e: IndexOutOfBoundsException) {
             e.printStackTrace()
+            return false
         }
     }
 }

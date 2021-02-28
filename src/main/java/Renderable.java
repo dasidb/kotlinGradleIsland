@@ -1,6 +1,6 @@
-public abstract class Renderable {
+public interface Renderable {
 
-     private int posX;
-     private int posY;
-      private String img;
+    public float getPosX();
+    public float getPosY();
+    public float getImgLink();
 }

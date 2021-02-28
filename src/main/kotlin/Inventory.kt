@@ -60,9 +60,9 @@ class Inventory(val playerItemMap : MutableMap<Int, PlayerItem> = HashMap(),
     fun drawInventory(pApplet: PApplet){
         var x = 0
         playerItemMap.forEach{k, v ->
-            println(k)
 
-            println(v.item.image + " das ist der name")
+
+
             pApplet.image(Game.imageMap.get(v.item.image.toLowerCase()), (x*50F), 600F)
             if(v.item.image.equals("Wasser"))
                 pApplet.fill(0F,0F,0F)

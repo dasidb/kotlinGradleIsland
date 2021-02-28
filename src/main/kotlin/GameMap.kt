@@ -53,6 +53,8 @@ class GameMap(pApplet: PApplet){
             return WaterTile(vector.x, vector.y)
         else if(noise < 0.8F)
                 return SandTile(vector.x,vector.y)
+        else if(noise < 0.9F)
+                return GrassTreeTile(vector.x,vector.y)
         else
             return GrassTile(vector.x, vector.y)
     }
@@ -68,7 +70,11 @@ class GameMap(pApplet: PApplet){
 
 
                 var image: PImage
-                if (tile is GrassTile)
+                if (tile is GrassTreeTile)
+                    image = Game.imageMap.get("grassTreeTile")!!
+                else if(tile is DustTile)
+                    image = Game.imageMap.get("dustTile")!!
+                else if (tile is GrassTile)
                     image = Game.imageMap.get("grassTile")!!
 
                    else if (tile is SandTile)
