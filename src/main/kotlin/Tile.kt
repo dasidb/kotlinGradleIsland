@@ -1,14 +1,9 @@
 import java.time.LocalDateTime
 
-open abstract class Tile(
-
-
+abstract class Tile(
     var cordX: Float,
-    var cordY: Float
+    var cordY: Float) : TileUsage{
 
-
-
-){
     var lasttimeHarvested : LocalDateTime? = null
 
 fun setlastTimeHarvested(){

@@ -11,7 +11,13 @@ class GrassTile (cordX : Float, cordY : Float, ressourceID : Int = 100 ) : Tile(
         return tile1
     }
 
+    override fun harvest() {
+        TODO("Not yet implemented")
+    }
 
+    override fun changeTile(): Tile {
+        TODO("Not yet implemented")
+    }
 
 
 }

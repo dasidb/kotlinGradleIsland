@@ -4,13 +4,13 @@ import processing.core.PVector
 
 
 class GameMap(pApplet: PApplet){
-   var gameMap : HashMap<PVector, Tile> = HashMap()
+   var tileMap : HashMap<PVector, Tile> = HashMap()
     var test : MutableMap<PVector, Tile> = HashMap();
     var pApplet = pApplet
   //  var  imageMap : MutableMap<String, PImage> = HashMap()
 
     init {
-        gameMap = createGameMap(0F,0F)
+        tileMap = createGameMap(0F,0F)
 
     }
 
@@ -22,17 +22,17 @@ class GameMap(pApplet: PApplet){
         for(x in 0 until 40 ){
             for(y in 0 until 40){
                 var cordVector : PVector = PVector(x.toFloat() + cordX, y.toFloat() + cordY)
-                if(gameMap.containsKey(cordVector))
+                if(tileMap.containsKey(cordVector))
                     continue
                // val noiseValue : Float = useNoice((cordVector.x + x.toFloat() / 40F),(cordVector.y + y.toFloat() / 40F))
                 val noiseValue : Float = useNoice((testCordX + x.toFloat() / 40F),(testCordY + y.toFloat() / 40F))
 
 
-                gameMap.put(cordVector, addTileToMap(noiseValue,cordVector))
+                tileMap.put(cordVector, addTileToMap(noiseValue,cordVector))
 
             }
         }
-        return gameMap
+        return tileMap
         }
 
     fun useNoice(x : Float, y : Float) : Float{
@@ -66,7 +66,7 @@ class GameMap(pApplet: PApplet){
         for(x in 0 until 40) {
             for(y in 0 until 40)   {
 
-                var tile = gameMap.get(PVector(x + camera.x, y + camera.y))
+                var tile = tileMap.get(PVector(x + camera.x, y + camera.y))
 
 
                 var image: PImage
