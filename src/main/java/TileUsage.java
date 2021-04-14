@@ -1,5 +1,6 @@
 public interface TileUsage {
 
-    Item harvest();
+    int harvest();
     Tile changeTile();
+    void interaction();
 }

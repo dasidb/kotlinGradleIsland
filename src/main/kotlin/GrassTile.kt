@@ -11,13 +11,17 @@ class GrassTile (cordX : Float, cordY : Float, ressourceID : Int = 100 ) : Tile(
         return tile1
     }
 
-    override fun harvest() {
-        TODO("Not yet implemented")
+    override fun harvest(): Int {
+        return 100
+
     }
+
 
     override fun changeTile(): Tile {
-        TODO("Not yet implemented")
+        return DustTile(this.cordX,this.cordY)
     }
 
-
+    override fun interaction() {
+        TODO("Not yet implemented")
+    }
 }

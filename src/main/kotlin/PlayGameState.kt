@@ -79,57 +79,38 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
             if (key == 'd')
                 character.moveRight()
             if (key == 'q')
-                interactionDependingOnTile()
+                interactionDependingOnTile(character.mapPosition)
             if (key == 'b')
                 gameManager.currentGameState = CraftingGameState(pApplet, gameManager, character.inventory)
 
             if (key == 'e') {
-                //character.gatherResources(gameManager.gameMap.tileMap.get(character.mapPosition)!!, gameManager.globalItemMap )
-                // TODO: 13.04.2021 create better design
-                var tmpRessource = gameManager.gameMap.tileMap.get(character.mapPosition)!!.harvest()
-                if (tmpRessource != null) {
-                    character.inventory.addItemToInventory(tmpRessource, 3)
-                    interactionDependingOnTile()
-                    character.inventory.playerItemMap.forEach { k, v ->
-                        println(v.count.toString() + " " + v.item.name)
-                    }
-                } else {
-                    println("Du kannst hier nichts sammeln")
-                }
-                //
-
+                gatherRessources()
 
             }
         }
 
     }
 
-    fun interactionDependingOnTile() {
-
-        var tmpVec = PVector(character.mapPosition.x, character.mapPosition.y)
-        var tile = gameManager.gameMap.tileMap.get(tmpVec)
-
-
-        if (tile is GrassTreeTile) {
-            tile = tile.chopTree(tile)
-            gameManager.gameMap.tileMap.put(tmpVec, tile!!)
-            println("Baum gefällt")
-
-        } else if (tile is DustTile) {
-            println(tile.lasttimeHarvested)
-        } else if (tile is WaterTile)
-            println("bla")
-        else if (tile is GrassTile) {
-            tile = tile.harvest(tile)
-            gameManager.gameMap.tileMap.put(tmpVec, tile!!)
-            if (tile.setlastTimeHarvested() == null)
-                tile.setlastTimeHarvested()
-            println("Gras geerntet")
-        } else if (tile is SandTile)
-            println("blablabla")
-        else
-            println("no usable tile")
+    private fun gatherRessources() {
+        var tmpRessourceID = gameManager.gameMap.tileMap.get(character.mapPosition)!!.harvest()
+        if (tmpRessourceID != null) {
+            var tmpTile = gameManager.gameMap.tileMap.get(character.mapPosition)!!.changeTile()
+            if (tmpTile != null) {
+                gameManager.gameMap.tileMap.set(character.mapPosition, tmpTile)
+            }
+            character.inventory.addItemToInventory(gameManager.globalItemMap.get(tmpRessourceID)!!, 3)
+            // interactionDependingOnTile()
+            character.inventory.playerItemMap.forEach { k, v ->
+                println(v.count.toString() + " " + v.item.name)
+            }
+        } else {
+            println("Du kannst hier nichts sammeln")
+        }
     }
 
+    fun interactionDependingOnTile(tilePosition: PVector) {
+        var tile = gameManager.gameMap.tileMap.get(tilePosition)
+        tile!!.interaction()
 
+    }
 }
