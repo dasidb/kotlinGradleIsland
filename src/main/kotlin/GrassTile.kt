@@ -22,6 +22,6 @@ class GrassTile (cordX : Float, cordY : Float, ressourceID : Int = 100 ) : Tile(
     }
 
     override fun interaction() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }

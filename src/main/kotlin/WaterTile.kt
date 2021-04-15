@@ -16,6 +16,6 @@ class WaterTile(cordX : Float, cordY : Float ) : Tile(cordX,cordY) {
     }
 
     override fun interaction() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }

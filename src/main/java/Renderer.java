@@ -21,16 +21,31 @@ public class Renderer {
         if (instance == null) {
             instance = new Renderer();
         }
-        return  instance;
+        return instance;
     }
 
-    public void setPapplet(PApplet pApplet){
+    public void setPapplet(PApplet pApplet) {
         if (this.pApplet == null) {
             this.pApplet = pApplet;
         }
     }
 
     public void render(Renderable renderable) {
-    pApplet.image(imageMap.get(renderable.getImgLink()),renderable.getPosX(),renderable.getPosY());
+        renderDifferentLayers(renderable);
+
+    }
+
+    private void renderDifferentLayers(Renderable renderable) {
+        renderFirstLayer(renderable);
+        renderSecondLayer(renderable);
+    }
+
+    private void renderFirstLayer(Renderable renderable) {
+        pApplet.image(imageMap.get(renderable.getImgLink()), renderable.getPosX(), renderable.getPosY());
+    }
+
+
+    private void renderSecondLayer(Renderable renderable) {
+        //todo render buildings
     }
 }
