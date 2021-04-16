@@ -23,6 +23,7 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
     }
 
     override fun render() {
+        isThereASecondLayer = true
         // pApplet.image(Game.imageMap.get("craftingBackground"),0F,0F)
         craftingMenu()
 

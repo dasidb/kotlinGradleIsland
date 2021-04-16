@@ -60,9 +60,8 @@ class GameMap(pApplet: PApplet){
     }
 
     fun render(pApplet: PApplet, camera : PVector){
-      //  println(gameMap.size)
-    //gameMap.forEach{
-      //  k,v ->
+
+
         for(x in 0 until 40) {
             for(y in 0 until 40)   {
 

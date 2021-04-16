@@ -12,7 +12,7 @@ class Craft(
 
 
     init {
-        craftingList = createRecipeList1()
+        craftingList = createCraftingList()
         //createRecipeList()
     }
 
@@ -58,7 +58,7 @@ class Craft(
         return true
     }
 
-    fun createRecipeList1(): MutableList<Recipe> {
+    fun createCraftingList(): MutableList<Recipe> {
         val globalRecipeList: MutableList<Recipe> = ArrayList()
         val path = "resources/recipeList.json"
         val bufferedReader = BufferedReader(FileReader(path))

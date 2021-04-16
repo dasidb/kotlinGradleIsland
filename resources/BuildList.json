@@ -1,9 +1,14 @@
-[{"name":"Boards",
+[{"name":"Tent",
   "craftCostList":[
     {
       "itemId":103,
-      "amount":3,
+      "amount":5,
       "name": "Wood"
+    },
+    {
+      "itemId":100,
+      "amount":4,
+      "name": "Gras"
     }
   ],
   "itemID":301
@@ -25,7 +30,7 @@
 
   },
 
-  {"name": "Clay",
+  {"name": "House",
     "craftCostList": [
       {
         "itemId": 102,

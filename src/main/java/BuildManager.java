@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class BuildManager {
 
     private ArrayList<PlayerItem> buildList = new ArrayList<>();
+    private boolean buildstate = false;
 
     public ArrayList<PlayerItem> getBuildList() {
         return buildList;
@@ -15,6 +16,9 @@ public class BuildManager {
         this.buildList = buildList;
     }
 
+    public void setBuildState(){
+        this.buildstate = !buildstate;
+    }
     public BuildManager(){
         this.buildList = buildList;
     }
@@ -25,6 +29,17 @@ public class BuildManager {
     }
 
     public void render(PApplet pApplet) {
+        if(buildstate) {
+            drawBuildOutlines();
+            drawBuildings();
+        }
+    }
+
+    private void drawBuildOutlines() {
+
+    }
+
+    private void drawBuildings() {
 
     }
 }

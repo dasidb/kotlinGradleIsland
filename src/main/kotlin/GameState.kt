@@ -3,7 +3,8 @@ import processing.event.KeyEvent
 
 
 open abstract class  GameState(val pApplet: PApplet,
-                     val gameManager: GameManager
+                     val gameManager: GameManager,
+                               var isThereASecondLayer : Boolean = false
                 ){
    // val pApplet = pApplet
    // val gameManager: GameManager = gameManager

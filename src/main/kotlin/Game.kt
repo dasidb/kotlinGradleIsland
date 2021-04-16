@@ -144,6 +144,14 @@ class Game : PApplet() {
         image = loadImage("assets/tent.jpg")
         image.resize(50,50)
         imageMap.put("tent",image)
+        image = loadImage("assets/boards.jpg")
+        image.resize(50,50)
+        imageMap.put("board",image)
+        image = loadImage("assets/clay.jpg")
+        image.resize(50,50)
+        imageMap.put("clay",image)
+        image = loadImage("assets/arrowRight.png")
+        imageMap.put("arrowright",image)
 
     }
 
