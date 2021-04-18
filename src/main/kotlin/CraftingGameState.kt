@@ -34,16 +34,16 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
 
 
     fun craftingMenu() {
-        for (x in 0 until 5) {
-            for (y in 0 until 5) {
-                var tmpX = selection % 5
-                var tmpY : Int = selection / 5
+        for (x in 0 until 3) {
+            for (y in 0 until 3) {
+                var tmpX = selection % 3
+                var tmpY : Int = selection / 3
                 if(tmpX == x && tmpY == y) {
                     pApplet.fill(255F, 0F, 0F)
                 }else {
                     pApplet.fill(255F, 255F, 255F)
                 }
-                pApplet.rect(x.toFloat() * 160, y.toFloat() * 160, x + 160F, y + 160F)
+                pApplet.rect((x.toFloat() + 1) * 160, (y.toFloat() + 1) * 160, x + 160F, y + 160F)
 
                 displayCraftings()
             }
@@ -52,18 +52,18 @@ class CraftingGameState(pApplet: PApplet, gameManager: GameManager, val inventor
     }
 
     fun displayCraftings() {
-        for (y in 0 until 5) {
-            for (x in 0 until 5) {
+        for (y in 0 until 3) {
+            for (x in 0 until 3) {
                 var itterator = x + y * 5
                 try {
 
                     var tmp = craftingList.get(itterator)
                     pApplet.fill(0F, 0F, 0F)
-                    pApplet.text(tmp.name, x * 160F + 60, y * 160F + 60)
+                    pApplet.text(tmp.name, (x + 1) * 160F + 60, (y + 1) * 160F + 60)
                     var tmpItterator = 0
                     tmp.craftCostList.forEach() {
 
-                        pApplet.text(it.amount.toString() + " " + it.name, x * 160F + 60F, y * 160F + 80 + tmpItterator)
+                        pApplet.text(it.amount.toString() + " " + it.name, (x + 1) * 160F + 60F, (y + 1) * 160F + 80 + tmpItterator)
                         tmpItterator += 20
                     }
 

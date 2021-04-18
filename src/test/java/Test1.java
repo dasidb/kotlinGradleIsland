@@ -18,4 +18,14 @@ public class Test1 {
 
 
 
+    @Test
+    public void testString(){
+
+
+        if("IlllIIllIllllIlIIIlIlIl".equals("IlllIIllIllllIlIIIlIlIl")){
+            System.out.println("yay");
+        }else{
+            System.out.println("noe");
+        }
+    }
 }
