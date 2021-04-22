@@ -47,6 +47,8 @@ class Game : PApplet() {
         createItemMap()
         Renderer.getInstance().setPapplet(this)
         Renderer.getInstance().setImageMap(imageMap)
+        GridDrawer.getInstance().setPapplet((this))
+        GridDrawer.getInstance().setImageMap(imageMap as java.util.HashMap<String, PImage>?)
 
         gameManager?.changeGameState("playGameState", PlayGameState(this, gameManager!!,
                 gameManager!!.character))

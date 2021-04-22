@@ -8,6 +8,7 @@ public class BuildManager {
     private ArrayList<PlayerItem> buildList = new ArrayList<>();
     private boolean buildstate = false;
 
+    ArrayList<Renderable> testList;
     public ArrayList<PlayerItem> getBuildList() {
         return buildList;
     }
@@ -21,6 +22,7 @@ public class BuildManager {
     }
     public BuildManager(){
         this.buildList = buildList;
+        mockList();
     }
     public boolean build(PlayerItem playerItem, PVector pVector){
         buildList.add(playerItem);
@@ -29,17 +31,27 @@ public class BuildManager {
     }
 
     public void render(PApplet pApplet) {
-        if(buildstate) {
-            drawBuildOutlines();
+        //if(buildstate) {
             drawBuildings();
+            drawBuildOutlines();
+           // System.out.println("test");
+
+       // }
+    }
+
+    public
+    void drawBuildOutlines() {
+
+    }
+
+    public void drawBuildings() {
+        GridDrawer.getInstance().drawGrid(1,testList);
+    }
+
+    public void mockList(){
+        testList = new ArrayList<>();
+        for(int i = 0; i < 20; i++) {
+            testList.add(new TestRenderableObject(5, 5, "tent"));
         }
-    }
-
-    private void drawBuildOutlines() {
-
-    }
-
-    private void drawBuildings() {
-
     }
 }

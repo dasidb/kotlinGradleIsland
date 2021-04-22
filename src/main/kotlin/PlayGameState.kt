@@ -81,8 +81,12 @@ class PlayGameState(pApplet: PApplet, gameManager: GameManager, character: Chara
                 character.moveRight()
             if (key == 'q')
                 interactionDependingOnTile(character.mapPosition)
-            if (key == 'b')
+            if (key == 'c')
                 gameManager.currentGameState = CraftingGameState(pApplet, gameManager, character.inventory)
+            if (key == 'b'){
+                buildManager.render(pApplet);
+                // TODO: 22.04.2021 set a variable in buildmanager instead calling it here make the grid smaller/other Position
+            }
 
             if (key == 'e') {
                 gatherRessources()
