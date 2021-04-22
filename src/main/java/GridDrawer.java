@@ -42,6 +42,7 @@ public class GridDrawer {
                 }
                 pApplet.rect((x + 1) * 160, (y + 1) * 160, x + 160F, y + 160F);
                 String imageName = stuffToRender.get((int)x +((int)y*3)).imageName();
+                // TODO: 22.04.2021 write a better logic so that the arraylist can also be empty
                 pApplet.image(imageHashMap.get(imageName),(x + 1) * 160,(y + 1) * 160);
               //  displayCraftings();
             }
